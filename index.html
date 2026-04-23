@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iceland Ring Road — Stress-Proof Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #e8f4f8;
+    --glacier: #a8d5e8;
+    --deep: #1a2e3b;
+    --midnight: #0d1b26;
+    --aurora1: #4ecdc4;
+    --aurora2: #7fb3d3;
+    --aurora3: #b5ead7;
+    --lava: #e8533a;
+    --gold: #f0c060;
+    --moss: #6b8f71;
+    --snow: #f5f9fb;
+    --muted: #6b8ea0;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–midnight);
+color: var(–snow);
+font-family: ‘DM Sans’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Aurora background */
+body::before {
+content: ‘’;
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background:
+radial-gradient(ellipse 80% 40% at 20% 10%, rgba(78,205,196,0.08) 0%, transparent 60%),
+radial-gradient(ellipse 60% 30% at 80% 5%, rgba(127,179,211,0.06) 0%, transparent 50%),
+radial-gradient(ellipse 40% 60% at 50% 90%, rgba(181,234,215,0.04) 0%, transparent 50%);
+pointer-events: none;
+z-index: 0;
+}
+
+.container {
+max-width: 900px;
+margin: 0 auto;
+padding: 0 20px 60px;
+position: relative;
+z-index: 1;
+}
+
+/* HEADER */
+.hero {
+text-align: center;
+padding: 60px 20px 40px;
+position: relative;
+}
+
+.hero-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.3em;
+color: var(–aurora1);
+text-transform: uppercase;
+margin-bottom: 16px;
+opacity: 0;
+animation: fadeUp 0.6s ease 0.2s forwards;
+}
+
+.hero h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(2.4rem, 7vw, 4.2rem);
+font-weight: 900;
+line-height: 1.05;
+color: #fff;
+opacity: 0;
+animation: fadeUp 0.6s ease 0.4s forwards;
+}
+
+.hero h1 span {
+color: var(–aurora1);
+}
+
+.hero-sub {
+font-size: 14px;
+color: var(–muted);
+margin-top: 16px;
+font-family: ‘DM Mono’, monospace;
+letter-spacing: 0.05em;
+opacity: 0;
+animation: fadeUp 0.6s ease 0.6s forwards;
+}
+
+.trip-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+margin-top: 28px;
+opacity: 0;
+animation: fadeUp 0.6s ease 0.8s forwards;
+}
+
+.meta-badge {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(78,205,196,0.2);
+border-radius: 30px;
+padding: 6px 14px;
+font-size: 12px;
+font-family: ‘DM Mono’, monospace;
+color: var(–glacier);
+letter-spacing: 0.03em;
+}
+
+/* VEHICLE CARD */
+.vehicle-card {
+background: linear-gradient(135deg, rgba(26,46,59,0.9), rgba(13,27,38,0.9));
+border: 1px solid rgba(78,205,196,0.25);
+border-radius: 16px;
+padding: 24px 28px;
+margin-bottom: 32px;
+display: flex;
+gap: 20px;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.vehicle-icon {
+font-size: 48px;
+flex-shrink: 0;
+}
+
+.vehicle-info h3 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.2rem;
+color: #fff;
+margin-bottom: 4px;
+}
+
+.vehicle-info p {
+font-size: 12px;
+color: var(–muted);
+font-family: ‘DM Mono’, monospace;
+}
+
+.vehicle-detail {
+margin-left: auto;
+text-align: right;
+font-family: ‘DM Mono’, monospace;
+}
+
+.vehicle-detail .dates {
+font-size: 13px;
+color: var(–aurora1);
+font-weight: 500;
+}
+
+.vehicle-detail .insurance {
+font-size: 11px;
+color: var(–moss);
+margin-top: 4px;
+}
+
+/* SECTION HEADERS */
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.6rem;
+font-weight: 700;
+color: #fff;
+margin-bottom: 20px;
+padding-bottom: 10px;
+border-bottom: 1px solid rgba(78,205,196,0.15);
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.section-title .icon { font-size: 1.2rem; }
+
+/* CHECKLIST SECTIONS */
+.checklist-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 16px;
+margin-bottom: 40px;
+}
+
+.check-card {
+background: rgba(26,46,59,0.7);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius: 14px;
+padding: 20px;
+transition: border-color 0.2s;
+}
+
+.check-card:hover {
+border-color: rgba(78,205,196,0.3);
+}
+
+.check-card-title {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.25em;
+text-transform: uppercase;
+color: var(–aurora1);
+margin-bottom: 14px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.check-item {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 6px 0;
+border-bottom: 1px solid rgba(255,255,255,0.04);
+font-size: 13px;
+line-height: 1.4;
+color: #c8dce6;
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-box {
+width: 16px;
+height: 16px;
+border: 1.5px solid rgba(78,205,196,0.4);
+border-radius: 4px;
+flex-shrink: 0;
+margin-top: 1px;
+cursor: pointer;
+transition: all 0.15s;
+position: relative;
+}
+
+.check-box.checked {
+background: var(–aurora1);
+border-color: var(–aurora1);
+}
+
+.check-box.checked::after {
+content: ‘✓’;
+position: absolute;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+font-size: 10px;
+color: var(–midnight);
+font-weight: 700;
+}
+
+.check-item.done .check-text {
+text-decoration: line-through;
+opacity: 0.4;
+}
+
+.check-text { flex: 1; }
+
+.priority-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+flex-shrink: 0;
+margin-top: 5px;
+}
+.p-critical { background: var(–lava); }
+.p-high { background: var(–gold); }
+.p-normal { background: var(–moss); }
+
+/* CAMPERVAN SPECIFIC */
+.van-callout {
+background: linear-gradient(135deg, rgba(78,205,196,0.08), rgba(127,179,211,0.06));
+border: 1px solid rgba(78,205,196,0.3);
+border-radius: 14px;
+padding: 20px 24px;
+margin-bottom: 24px;
+font-size: 13px;
+line-height: 1.7;
+color: var(–glacier);
+}
+
+.van-callout strong {
+color: var(–aurora1);
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+display: block;
+margin-bottom: 8px;
+}
+
+/* ITINERARY */
+.day-cards { margin-bottom: 40px; }
+
+.day-card {
+background: rgba(26,46,59,0.6);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius: 16px;
+margin-bottom: 12px;
+overflow: hidden;
+transition: border-color 0.2s;
+}
+
+.day-card:hover { border-color: rgba(78,205,196,0.2); }
+
+.day-header {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 18px 22px;
+cursor: pointer;
+user-select: none;
+}
+
+.day-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 2rem;
+font-weight: 900;
+color: rgba(78,205,196,0.3);
+line-height: 1;
+min-width: 40px;
+}
+
+.day-info { flex: 1; }
+
+.day-title {
+font-size: 14px;
+font-weight: 500;
+color: #fff;
+}
+
+.day-meta {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+margin-top: 3px;
+}
+
+.day-tags {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+}
+
+.tag {
+padding: 3px 10px;
+border-radius: 20px;
+font-size: 10px;
+font-family: ‘DM Mono’, monospace;
+letter-spacing: 0.05em;
+}
+
+.tag-sleep { background: rgba(107,143,113,0.25); color: var(–moss); border: 1px solid rgba(107,143,113,0.3); }
+.tag-warn { background: rgba(232,83,58,0.15); color: #f08070; border: 1px solid rgba(232,83,58,0.3); }
+.tag-gem { background: rgba(78,205,196,0.12); color: var(–aurora1); border: 1px solid rgba(78,205,196,0.3); }
+.tag-food { background: rgba(240,192,96,0.12); color: var(–gold); border: 1px solid rgba(240,192,96,0.3); }
+
+.day-body {
+padding: 0 22px 18px;
+display: none;
+}
+
+.day-card.open .day-body { display: block; }
+
+.day-card.open .day-num { color: var(–aurora1); }
+
+.stop-list { list-style: none; }
+
+.stop-item {
+display: flex;
+gap: 12px;
+padding: 8px 0;
+border-bottom: 1px solid rgba(255,255,255,0.04);
+font-size: 13px;
+line-height: 1.5;
+color: #b8cdd8;
+}
+
+.stop-item:last-child { border-bottom: none; }
+
+.stop-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.stop-name {
+font-weight: 500;
+color: #e0ecf2;
+margin-bottom: 2px;
+}
+
+.stop-tip {
+font-size: 12px;
+color: var(–muted);
+}
+
+.buffer-box {
+background: rgba(240,192,96,0.08);
+border-left: 3px solid var(–gold);
+border-radius: 0 8px 8px 0;
+padding: 10px 14px;
+margin-top: 12px;
+font-size: 12px;
+color: #d4b060;
+font-family: ‘DM Mono’, monospace;
+}
+
+/* SKIP LIST */
+.skip-card {
+background: rgba(232,83,58,0.07);
+border: 1px solid rgba(232,83,58,0.2);
+border-radius: 12px;
+padding: 14px 18px;
+margin-bottom: 10px;
+font-size: 13px;
+display: flex;
+gap: 12px;
+}
+
+.skip-x { color: var(–lava); font-weight: 700; flex-shrink: 0; }
+.skip-why { color: #c0b0a8; }
+.skip-why strong { color: #f0e0d8; display: block; margin-bottom: 3px; }
+
+/* TIPS GRID */
+.tips-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 12px;
+margin-bottom: 40px;
+}
+
+.tip-card {
+background: rgba(26,46,59,0.7);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius: 12px;
+padding: 16px;
+font-size: 12.5px;
+color: #b0c8d4;
+line-height: 1.6;
+}
+
+.tip-card .tip-icon {
+font-size: 20px;
+margin-bottom: 8px;
+display: block;
+}
+
+.tip-card strong {
+color: #e0ecf2;
+display: block;
+margin-bottom: 4px;
+font-size: 13px;
+}
+
+/* BUDGET */
+.budget-table {
+background: rgba(26,46,59,0.7);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius: 14px;
+overflow: hidden;
+margin-bottom: 32px;
+}
+
+.budget-row {
+display: flex;
+padding: 12px 20px;
+border-bottom: 1px solid rgba(255,255,255,0.04);
+font-size: 13px;
+align-items: center;
+}
+
+.budget-row:last-child { border-bottom: none; }
+
+.budget-row.total {
+background: rgba(78,205,196,0.06);
+font-weight: 600;
+color: var(–aurora1);
+font-family: ‘DM Mono’, monospace;
+}
+
+.budget-label { flex: 1; color: #b8cdd8; }
+.budget-per { color: var(–muted); font-family: ‘DM Mono’, monospace; font-size: 12px; min-width: 100px; text-align: right; }
+.budget-total { font-family: ‘DM Mono’, monospace; font-size: 13px; min-width: 120px; text-align: right; color: var(–snow); }
+
+/* PROGRESS */
+.progress-bar {
+background: rgba(255,255,255,0.05);
+border-radius: 4px;
+height: 4px;
+margin-top: 6px;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+border-radius: 4px;
+background: linear-gradient(90deg, var(–aurora1), var(–aurora2));
+width: 0%;
+transition: width 1s ease;
+}
+
+.progress-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+margin-top: 4px;
+text-align: right;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+opacity: 0;
+animation: fadeUp 0.5s ease forwards;
+}
+
+/* DIVIDER */
+.divider {
+border: none;
+border-top: 1px solid rgba(78,205,196,0.1);
+margin: 40px 0;
+}
+
+/* FOOTER */
+.footer {
+text-align: center;
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: rgba(107,142,160,0.5);
+letter-spacing: 0.1em;
+padding-top: 20px;
+}
+
+/* TABS */
+.tabs {
+display: flex;
+gap: 4px;
+margin-bottom: 28px;
+background: rgba(255,255,255,0.03);
+border-radius: 12px;
+padding: 4px;
+border: 1px solid rgba(255,255,255,0.06);
+flex-wrap: wrap;
+}
+
+.tab {
+flex: 1;
+min-width: 100px;
+text-align: center;
+padding: 10px 14px;
+border-radius: 9px;
+font-size: 12px;
+font-family: ‘DM Mono’, monospace;
+cursor: pointer;
+color: var(–muted);
+transition: all 0.2s;
+border: none;
+background: transparent;
+}
+
+.tab.active {
+background: var(–aurora1);
+color: var(–midnight);
+font-weight: 600;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* CHECKLIST PROGRESS */
+.cl-progress-wrap {
+margin-bottom: 24px;
+}
+
+.cl-stats {
+display: flex;
+justify-content: space-between;
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+color: var(–muted);
+margin-bottom: 6px;
+}
+
+.cl-stats span { color: var(–aurora1); }
+
+/* TOGGLE CHEVRON */
+.chevron {
+color: var(–muted);
+font-size: 12px;
+transition: transform 0.2s;
+}
+.day-card.open .chevron { transform: rotate(180deg); }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+    <div class="hero-label">🇮🇸 Stress-Proof Edition · 4 People · 2 Couples</div>
+    <h1>Iceland<br><span>Ring Road</span></h1>
+    <div class="hero-sub">Apr 25 – May 2, 2026 · VW California Beach · 8 Days</div>
+    <div class="trip-meta">
+      <span class="meta-badge">✈ Departs Toronto Apr 24</span>
+      <span class="meta-badge">🚐 VW California Beach 2026 Hybrid</span>
+      <span class="meta-badge">💎 Platinum PLUS+ Insurance</span>
+      <span class="meta-badge">🏕 Car Camping Only</span>
+      <span class="meta-badge">👥 4 People (2 Couples)</span>
+    </div>
+  </div>
+
+  <!-- VEHICLE CARD -->
+
+  <div class="vehicle-card fade-in">
+    <div class="vehicle-icon">🚐</div>
+    <div class="vehicle-info">
+      <h3>VW California Beach 2026 — Hybrid</h3>
+      <p>AUTOMATIC · PICKUP & DROPOFF: Keflavík Airport</p>
+      <p style="margin-top:6px; color:#6b8ea0; font-size:12px;">4 blankets included · Platinum PLUS+ full coverage · No F-roads, ever</p>
+    </div>
+    <div class="vehicle-detail">
+      <div class="dates">Apr 25 08:30 → May 02 18:00</div>
+      <div class="insurance">✅ Platinum PLUS+ · Fully covered</div>
+      <div class="insurance">🛣 Iceland Road Fee: ~€95 — pay online BEFORE arrival</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('checklist')">📦 Packing</button>
+    <button class="tab" onclick="switchTab('itinerary')">🗺 Itinerary</button>
+    <button class="tab" onclick="switchTab('tips')">💡 Tips</button>
+    <button class="tab" onclick="switchTab('budget')">💸 Budget</button>
+  </div>
+
+  <!-- ===== PACKING TAB ===== -->
+
+  <div id="tab-checklist" class="tab-panel active">
+
+```
+<div class="van-callout">
+  <strong>🚐 VW California Beach — What's Already There</strong>
+  The California Beach has a pop-up roof with 2 sleeping spots, a fold-flat rear bench for 2 more, a small kitchenette (sink, 2-burner stove, mini-fridge), and storage. You <em>do not</em> need a tent. You need bedding, food, and everything below. 4 blankets are included in your rental — bring sleeping bags for overnight cold (-3 to 5°C at night in April).
+</div>
+
+<div class="cl-progress-wrap">
+  <div class="cl-stats">
+    <span>Packing Progress</span>
+    <span><span id="checked-count">0</span> / <span id="total-count">0</span> items checked</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="main-progress"></div>
+  </div>
+  <div class="progress-label" id="progress-pct">0% packed</div>
+</div>
+
+<div class="checklist-grid" id="checklist-container"></div>
+```
+
+  </div>
+
+  <!-- ===== ITINERARY TAB ===== -->
+
+  <div id="tab-itinerary" class="tab-panel">
+
+```
+<div class="van-callout">
+  <strong>🧘 Stress-Proof Philosophy</strong>
+  This version trims 10–15% of stops, adds weather buffers, and protects your energy. Every day has a CORE (non-negotiable) and BONUS (skip if tired/weather bad). You'll feel like you <em>explored</em> Iceland — not survived it.
+</div>
+
+<div class="day-cards" id="itinerary-container"></div>
+```
+
+  </div>
+
+  <!-- ===== TIPS TAB ===== -->
+
+  <div id="tab-tips" class="tab-panel">
+    <div class="tips-grid" id="tips-container"></div>
+
+```
+<h3 class="section-title" style="margin-top:8px;"><span class="icon">🚫</span> Skip These</h3>
+<div id="skip-container"></div>
+```
+
+  </div>
+
+  <!-- ===== BUDGET TAB ===== -->
+
+  <div id="tab-budget" class="tab-panel">
+    <div class="van-callout">
+      <strong>💸 Budget for 4 People (2 Couples) · 8 Nights</strong>
+      All figures in CAD. Campervan rental already paid. Split everything 4 ways = very affordable per person.
+    </div>
+    <div class="budget-table" id="budget-container"></div>
+  </div>
+
+  <div class="footer">
+    Iceland Ring Road · Stress-Proof Edition · 4 People · Apr 25 – May 2, 2026
+  </div>
+
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────────
+
+const checklistData = [
+  {
+    title: "🛏 Sleeping (Van Life)", color: "aurora1",
+    items: [
+      { text: "Sleeping bag rated -5°C minimum (×4)", priority: "critical" },
+      { text: "Travel pillow, compressible (×4)", priority: "high" },
+      { text: "Sleep mask — it gets bright late April", priority: "high" },
+      { text: "Earplugs (campsite neighbors)", priority: "normal" },
+      { text: "4 blankets ✅ included in rental", priority: "normal" },
+    ]
+  },
+  {
+    title: "🧥 Clothing (Per Person)", color: "aurora2",
+    items: [
+      { text: "Waterproof windproof jacket — CRITICAL", priority: "critical" },
+      { text: "Waterproof pants (waterfall spray)", priority: "critical" },
+      { text: "Thermal tops + bottoms (2–3 sets)", priority: "high" },
+      { text: "Fleece or wool sweater (1–2)", priority: "high" },
+      { text: "Down insulating jacket", priority: "high" },
+      { text: "Warm gloves + thermal hat + neck gaiter", priority: "high" },
+      { text: "Hiking pants ×2, casual jeans ×1", priority: "normal" },
+      { text: "Moisture-wicking t-shirts (4–5)", priority: "normal" },
+      { text: "Merino wool socks & underwear ×7–8", priority: "normal" },
+      { text: "Swimsuit ×2 — quick-dry (hot springs)", priority: "high" },
+      { text: "Flip-flops for changing rooms", priority: "normal" },
+    ]
+  },
+  {
+    title: "👟 Footwear", color: "moss",
+    items: [
+      { text: "Waterproof insulated hiking boots (BREAK IN BEFORE TRIP!)", priority: "critical" },
+      { text: "Casual sneakers/shoes for driving/town", priority: "normal" },
+      { text: "Ice cleats / Yaktrax — April ice is real", priority: "high" },
+    ]
+  },
+  {
+    title: "🍳 Food & Cooking (Van Has Kitchenette)", color: "gold",
+    items: [
+      { text: "Bread, peanut butter, jam, crackers", priority: "high" },
+      { text: "Instant noodles, pasta, pasta sauce", priority: "high" },
+      { text: "Eggs — buy in Reykjavík Day 1", priority: "high" },
+      { text: "Snack bars, nuts, dried fruit", priority: "high" },
+      { text: "Instant coffee + tea bags", priority: "high" },
+      { text: "Pot, pan, plates/bowls, utensils (×4)", priority: "high" },
+      { text: "Biodegradable soap + sponge", priority: "normal" },
+      { text: "Cutting board + knife", priority: "normal" },
+      { text: "Reusable water bottles ×4 (tap = world-class)", priority: "high" },
+      { text: "Portable stove + fuel canister (backup)", priority: "normal" },
+    ]
+  },
+  {
+    title: "🧴 Toiletries & Health", color: "aurora1",
+    items: [
+      { text: "Toothpaste, shampoo, conditioner, body wash", priority: "high" },
+      { text: "Lip balm + heavy moisturizer (wind dries fast)", priority: "high" },
+      { text: "Sunscreen SPF 50 (UV strong in cold/reflective snow)", priority: "high" },
+      { text: "First aid kit: bandages, blister pads, ibuprofen", priority: "critical" },
+      { text: "All prescription meds + extra supply", priority: "critical" },
+      { text: "Dry shampoo (shower-free days happen)", priority: "normal" },
+      { text: "Microfibre towels ×2 per person", priority: "high" },
+    ]
+  },
+  {
+    title: "📱 Tech & Navigation", color: "glacier",
+    items: [
+      { text: "Phone + large power bank (20,000mAh+)", priority: "critical" },
+      { text: "Car USB charger — van has USB but bring backup", priority: "high" },
+      { text: "Camera + spare memory cards + extra battery", priority: "normal" },
+      { text: "Offline maps downloaded TONIGHT (Maps.me or Google)", priority: "critical" },
+      { text: "European adapter (Iceland uses type F plugs)", priority: "critical" },
+      { text: "Bluetooth speaker — van evenings", priority: "normal" },
+    ]
+  },
+  {
+    title: "🚐 Van Essentials", color: "lava",
+    items: [
+      { text: "Ice scraper — BUY at airport petrol station Day 1", priority: "critical" },
+      { text: "Wet wipes — invaluable for quick cleanup", priority: "high" },
+      { text: "Paper towels + trash bags (Leave No Trace)", priority: "high" },
+      { text: "Headlamp + spare batteries (×2 per couple)", priority: "high" },
+      { text: "Foldable camping chairs ×4 (optional but great)", priority: "normal" },
+      { text: "Bungee cords / dry bags for wet gear", priority: "normal" },
+    ]
+  },
+  {
+    title: "📄 Documents & Admin", color: "gold",
+    items: [
+      { text: "Passport — valid 6+ months", priority: "critical" },
+      { text: "Rental confirmation + Platinum PLUS+ docs", priority: "critical" },
+      { text: "Travel insurance docs (all 4 people)", priority: "critical" },
+      { text: "Iceland Road Fee receipt (~€95) — pay BEFORE arrival", priority: "critical" },
+      { text: "Credit/debit card — Iceland is cashless", priority: "critical" },
+      { text: "Secret Lagoon booking confirmation", priority: "high" },
+      { text: "Mývatn / Forest Lagoon booking", priority: "high" },
+      { text: "Húsavík whale tour (if booked)", priority: "high" },
+      { text: "Emergency contacts written on paper", priority: "high" },
+    ]
+  }
+];
+
+const itineraryData = [
+  {
+    day: 1, date: "Apr 25", title: "Arrive · Stock Up · Settle In",
+    drive: "45 min · Keflavík → Reykjavík",
+    sleep: "Reykjavík Campsite ~$30 CAD",
+    stops: [
+      { icon: "✈️", name: "Pickup VW California Beach", tip: "Buy ice scraper at airport petrol station. Check van thoroughly. Note any existing damage." },
+      { icon: "🛒", name: "Bónus Supermarket — BIG grocery haul", tip: "Stock 3–4 days NOW. Rural stores charge 2×. Bread, eggs, pasta, PB, snacks, coffee." },
+      { icon: "⛽", name: "Fill the fuel tank", tip: "Always keep above half. Stations can be 100km+ apart on Ring Road." },
+      { icon: "⛪", name: "Hallgrímskirkja + Laugavegur walk", tip: "Decompress. Easy golden hour stroll. Free." },
+      { icon: "📱", name: "Download offline maps tonight", tip: "Maps.me or Google Maps offline. Cell signal disappears for hours between towns." },
+    ],
+    buffer: "BUFFER: Day 1 is intentionally light. Rest. You have a big drive tomorrow.",
+    tags: [{ type: "sleep", text: "Camp night 1" }]
+  },
+  {
+    day: 2, date: "Apr 26", title: "Golden Circle — Done Right",
+    drive: "~230 km loop · Leave by 7:30 AM",
+    sleep: "Selfoss or Flúðir Campsite ~$25 CAD",
+    stops: [
+      { icon: "🌍", name: "Þingvellir National Park (arrive before 9 AM)", tip: "CORE STOP. Tectonic plate rift + UNESCO site. Take Öxará river trail — not the tourist path. Leave by 9 AM before buses arrive." },
+      { icon: "💦", name: "Geysir → Strokkur geyser", tip: "CORE STOP. Erupts every 5–10 min. Hike the hill behind Blesi for a crowd-free panorama." },
+      { icon: "🌊", name: "Gullfoss Waterfall", tip: "CORE STOP. Walk the lower path to feel spray. Wind is strong — secure your hat." },
+      { icon: "🔴", name: "Kerið Crater Lake", tip: "BONUS. 45 min, ~700 ISK entry. Skip if tired or weather turns." },
+      { icon: "🏊", name: "Secret Lagoon, Flúðir (NOT Blue Lagoon)", tip: "CORE STOP. $30 CAD vs $100+ for Blue Lagoon. Authentic, warm, perfect end to day. Book online ahead." },
+    ],
+    buffer: "WEATHER BUFFER: If Þingvellir is stormy, reverse order and end there. Golden Circle is flexible.",
+    tags: [{ type: "gem", text: "Secret Lagoon" }, { type: "sleep", text: "Camp night 2" }]
+  },
+  {
+    day: 3, date: "Apr 27", title: "South Coast — Waterfalls & Black Sand",
+    drive: "~180 km · Selfoss → Vík",
+    sleep: "Vík Campsite ~$25 CAD",
+    stops: [
+      { icon: "💧", name: "Seljalandsfoss — walk behind the falls", tip: "CORE STOP. Waterproof jacket + shoes essential. Arrive early AM or after 6 PM for golden light." },
+      { icon: "🕵️", name: "Gljúfrabúi — hidden waterfall", tip: "HIDDEN GEM. 5 min from Seljalandsfoss. Tucked behind a cliff crack. Wade a shallow stream. Almost no one finds it." },
+      { icon: "⛰", name: "Skógafoss — climb the 527 steps", tip: "CORE STOP. Top-down view is extraordinary. Arrive before 9 AM." },
+      { icon: "🧊", name: "Sólheimajökull Glacier", tip: "BONUS. Free walk up to the glacier tongue. Skip if running behind." },
+      { icon: "🏖", name: "Víkurfjara Black Sand Beach (not Reynisfjara)", tip: "CORE STOP. 2 min past Reynisfjara — same drama, far fewer crowds. ⚠️ NEVER turn your back to the ocean." },
+    ],
+    buffer: "TRIM: Skip Sólheimajökull if you're behind schedule. Everything else is essential.",
+    tags: [{ type: "warn", text: "⚠️ Sneaker waves" }, { type: "sleep", text: "Camp night 3" }]
+  },
+  {
+    day: 4, date: "Apr 28", title: "Glacier Lagoon, Diamond Beach & Höfn",
+    drive: "~250 km · Vík → Höfn · longest drive",
+    sleep: "Höfn Campsite ~$25 CAD",
+    stops: [
+      { icon: "🏜", name: "Fjaðrárgljúfur Canyon (15 min detour)", tip: "BONUS. Dramatic moss-walled canyon. Short rim hike. Skip if tight on time." },
+      { icon: "🧊", name: "Jökulsárlón Glacier Lagoon", tip: "CORE STOP — do not skip. Icebergs calving from Vatnajökull. Arrive before 9 AM. 60–90 min." },
+      { icon: "💎", name: "Diamond Beach", tip: "CORE STOP. Directly across the road. Glacial ice on black sand. Sunrise here = extraordinary." },
+      { icon: "⛰", name: "Vestrahorn Mountain", tip: "BONUS. Iconic jagged peak. 30 min detour. Highly photogenic." },
+      { icon: "🦞", name: "Langoustine dinner in Höfn", tip: "Iceland's langoustine capital. This is a splurge meal. Worth every ISK." },
+    ],
+    buffer: "BUFFER: This is the longest drive (250 km). Leave Vík by 8 AM. Skip Fjaðrárgljúfur if weather is bad.",
+    tags: [{ type: "gem", text: "Diamond Beach" }, { type: "food", text: "Langoustine!" }, { type: "sleep", text: "Camp night 4" }]
+  },
+  {
+    day: 5, date: "Apr 29", title: "Eastfjords — Iceland's Quiet Secret",
+    drive: "~260 km · Höfn → Egilsstaðir · 5–6 hrs with stops",
+    sleep: "Egilsstaðir Campsite ~$25 CAD",
+    stops: [
+      { icon: "🦌", name: "Eastfjords Coastal Drive", tip: "Ring Road hugs cliffsides above deep fjords. Pull over freely. Reindeer on hillsides. Fishing villages." },
+      { icon: "🏞", name: "Studlagil Canyon Viewpoint", tip: "CORE STOP. Most spectacular basalt canyon with vivid turquoise river. Free platform viewpoint. Road 923 off Ring Road." },
+      { icon: "🌊", name: "Hengifoss Waterfall (near Egilsstaðir)", tip: "CORE STOP. 128m tall with red clay + black basalt stripes. 5.6 km round-trip, 2 hrs. Pass Litlanesfoss on the way." },
+      { icon: "🛒", name: "Nettó grocery restock in Egilsstaðir", tip: "LOGISTICS STOP. Last major town for a while. Fill up tank. Buy food for 2 days." },
+    ],
+    buffer: "BUFFER: ChatGPT called this day 'scenic drive, weather dependent.' That's wrong. Hengifoss + Studlagil are world-class. But if you ARRIVE late from Day 4, just do Studlagil and save Hengifoss energy.",
+    tags: [{ type: "gem", text: "Hidden Eastfjords" }, { type: "sleep", text: "Camp night 5" }]
+  },
+  {
+    day: 6, date: "Apr 30", title: "North Iceland — Geothermal Wonders",
+    drive: "~260 km · Egilsstaðir → Mývatn",
+    sleep: "Hlíð Campsite, Mývatn ~$28 CAD",
+    stops: [
+      { icon: "⚡", name: "Dettifoss — Europe's most powerful waterfall", tip: "CORE STOP. 150-foot drop, thunderous roar. Take the WEST-side paved road. Allow 60–90 min." },
+      { icon: "🌋", name: "Hverir Geothermal Area — Námafjall", tip: "CORE STOP. Bubbling mud pots, sulfur vents — looks like Mars. Free entry. Visit at golden hour for empty crowds." },
+      { icon: "🐉", name: "Grjótagjá Cave", tip: "BONUS. Hot spring inside a lava cave. Game of Thrones Jon Snow scene. Too hot to swim now. 5 min stop, free." },
+      { icon: "🧌", name: "Dimmuborgir Lava Fields", tip: "BONUS. Eerie lava pillars and arches. Troll folklore. 30–45 min walk." },
+      { icon: "🏊", name: "Mývatn Nature Baths OR Forest Lagoon", tip: "CORE STOP. Mývatn re-opening 2026 post-renovation — CHECK STATUS before arrival. If closed: Forest Lagoon near Akureyri is equally stunning. BOOK ONLINE." },
+      { icon: "🌈", name: "Goðafoss at golden hour (9–10 PM)", tip: "CORE STOP. Wide horseshoe waterfall. Visit late for empty parking." },
+    ],
+    buffer: "BUFFER: Skip Dimmuborgir if you're tired — it's a bonus, not essential. Dettifoss, Hverir, and hot springs are the non-negotiables.",
+    tags: [{ type: "gem", text: "Grjótagjá Cave" }, { type: "sleep", text: "Camp night 6" }]
+  },
+  {
+    day: 7, date: "May 1", title: "Akureyri → Long Drive → Borgarnes",
+    drive: "~330 km · Long day — leave Mývatn by 7–8 AM",
+    sleep: "Borgarnes Campsite ~$28 CAD",
+    stops: [
+      { icon: "🐋", name: "Húsavík Whale Watching (optional)", tip: "BONUS — only add if you leave Mývatn by 7 AM. 20 min detour. Humpbacks active from April. North Sailing electric boat. 3 hrs. Book ahead." },
+      { icon: "🏙", name: "Akureyri — Iceland's second city", tip: "CORE STOP. Heart traffic lights, botanical garden (free), Akureyrarkirkja church, good coffee. 1–2 hrs." },
+      { icon: "🛒", name: "Bónus grocery restock in Akureyri", tip: "LOGISTICS — last major Bónus before Reykjavík. Stock up for Day 8." },
+      { icon: "🏔", name: "Troll Peninsula scenic detour (optional)", tip: "BONUS. Adds ~45 min. Mountain fjord views, no tourists. Skip if behind schedule." },
+    ],
+    buffer: "BUFFER: Day 7 is the longest drive (330 km). If you skipped Húsavík, leave at 8 AM. Borgarnes campsite is peaceful and underrated. Rest here.",
+    tags: [{ type: "warn", text: "⚠️ Long drive day" }, { type: "sleep", text: "Camp night 7" }]
+  },
+  {
+    day: 8, date: "May 2", title: "Return — Bonus Snæfellsnes or Reykjavík",
+    drive: "~75 km direct OR +150 km Snæfellsnes loop",
+    sleep: "Fly home — return van at Keflavík 18:00",
+    stops: [
+      { icon: "🌋", name: "Snæfellsnes Peninsula (HIGHLY recommended if afternoon flight)", tip: "BONUS. 'Iceland in miniature' — glacier, lava fields, seals, Kirkjufell mountain. 5–6 hr loop from Borgarnes. Worth it for afternoon flights." },
+      { icon: "♨️", name: "Deildartunguhver Hot Spring (en route)", tip: "FREE 5 min stop. Europe's highest-flow boiling hot spring. Under-visited and dramatic." },
+      { icon: "🏙", name: "Reykjavík final morning", tip: "Laugavegur stroll, Hallgrímskirkja one last time, Sægreifinn Sea Baron for lamb soup." },
+      { icon: "✈️", name: "Return van at Keflavík by 18:00", tip: "Allow 45–50 min drive from Reykjavík to airport. Leave city by 16:30 at latest. Clean out van, note fuel." },
+    ],
+    buffer: "If flying in the afternoon, do Snæfellsnes in the morning. It's spectacular and only 1.5 hrs from Borgarnes.",
+    tags: [{ type: "gem", text: "Snæfellsnes bonus" }]
+  }
+];
+
+const tipsData = [
+  { icon: "☀️", title: "Daylight", text: "13–16 hrs/day by late April. Visit popular spots at 7–8 AM or after 7 PM. Near-empty parking + golden light." },
+  { icon: "🌦", title: "Weather", text: "Expect 4 seasons in 1 day. Wind + horizontal rain with no warning. Always layer before getting out of the van." },
+  { icon: "⛽", title: "Fuel", text: "Fill up in every town. Stations can be 80–150 km apart. NEVER let the tank drop below half on the Ring Road." },
+  { icon: "🌉", title: "Single Bridges", text: "Ring Road has 32 single-lane bridges. Vehicle closest to the bridge has right of way — pay attention." },
+  { icon: "💳", title: "Money", text: "Iceland is cashless. Card works everywhere including campsites. Keep a tiny amount of ISK for parking meters only." },
+  { icon: "📡", title: "Cell Signal", text: "Download offline maps TONIGHT before leaving Reykjavík. Signal disappears for hours between towns." },
+  { icon: "🎉", title: "Events", text: "Late April = First Day of Summer (Sumardagurinn fyrsti). Local parades in small towns. Festive!" },
+  { icon: "🦋", title: "Wildlife", text: "Whale season opens April. Puffins appear at Arnarstapi late April. Reindeer visible in Eastfjords." },
+  { icon: "🛣", title: "Road Fee", text: "Iceland road usage fee introduced Jan 2026. ~€95 for 10 days for cars. Pay online BEFORE arrival to avoid fines." },
+  { icon: "🎫", title: "Book Ahead", text: "Secret Lagoon, Mývatn/Forest Lagoon, and Húsavík whale tours SELL OUT in April. Book before you fly." },
+  { icon: "🏕", title: "Campsite Tip", text: "Iceland Camping Card saves money on 8+ nights. Check if your campsites are on the card scheme." },
+  { icon: "🚫", title: "No F-Roads", text: "All F-roads closed April–May. Do NOT attempt regardless of what the rental says. 2WD on F-road = voided Platinum PLUS+ insurance + large fine." },
+];
+
+const skipData = [
+  { name: "Blue Lagoon", reason: "Over $100 CAD, shoulder-to-shoulder crowds, corporate spa feel. Secret Lagoon (Day 2) costs $30 CAD and is genuinely better. Save the $70 for langoustine in Höfn." },
+  { name: "Reynisfjara main carpark", reason: "Beautiful but overrun with tour buses. Víkurfjara Beach is 2 min further east — same drama, far fewer people. See both if you want, but go to Víkurfjara first." },
+  { name: "Reykjavík Whale Watching", reason: "Whales are rarely close in Reykjavík. The city tours are tourist traps. Húsavík (Day 7 optional) is Iceland's actual whale capital or skip entirely." },
+];
+
+const budgetData = [
+  { label: "Campervan rental (already paid, 4 people)", perPerson: "~$1,200", total: "~$4,800 CAD total" },
+  { label: "Campsites (8 nights × ~$28 avg)", perPerson: "$56", total: "~$224 total" },
+  { label: "Groceries + self-catering food", perPerson: "$120–160", total: "~$480–640 total" },
+  { label: "Secret Lagoon (Day 2)", perPerson: "$30", total: "~$120 total" },
+  { label: "Mývatn Baths / Forest Lagoon (Day 6)", perPerson: "$45–65", total: "~$180–260 total" },
+  { label: "Gas (Ring Road ~3,000 km hybrid)", perPerson: "$60–80", total: "~$240–320 total" },
+  { label: "Iceland Road Fee", perPerson: "$35", total: "~$140 total" },
+  { label: "Attraction entries (Kerið, Hengifoss, etc.)", perPerson: "$20–30", total: "~$80–120 total" },
+  { label: "Eating out 1–2 times (langoustine Höfn etc.)", perPerson: "$60–80", total: "~$240–320 total" },
+  { label: "TOTAL per person (excl. flights)", perPerson: "~$1,600–1,700", total: "~$6,500–7,000 total", isTotal: true },
+];
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────────────────────────
+
+function renderChecklist() {
+  const container = document.getElementById('checklist-container');
+  let totalItems = 0;
+
+  checklistData.forEach((section, si) => {
+    const card = document.createElement('div');
+    card.className = 'check-card';
+
+    const title = document.createElement('div');
+    title.className = 'check-card-title';
+    title.textContent = section.title;
+    card.appendChild(title);
+
+    section.items.forEach((item, ii) => {
+      const id = `item-${si}-${ii}`;
+      totalItems++;
+
+      const row = document.createElement('div');
+      row.className = 'check-item';
+      row.dataset.id = id;
+
+      const dot = document.createElement('div');
+      dot.className = `priority-dot p-${item.priority}`;
+
+      const box = document.createElement('div');
+      box.className = 'check-box';
+      box.dataset.id = id;
+      box.addEventListener('click', () => toggleCheck(id));
+
+      const text = document.createElement('span');
+      text.className = 'check-text';
+      text.textContent = item.text;
+
+      row.appendChild(dot);
+      row.appendChild(box);
+      row.appendChild(text);
+      card.appendChild(row);
+    });
+
+    container.appendChild(card);
+  });
+
+  document.getElementById('total-count').textContent = totalItems;
+  updateProgress();
+}
+
+let checkedItems = new Set();
+
+function toggleCheck(id) {
+  const box = document.querySelector(`.check-box[data-id="${id}"]`);
+  const row = document.querySelector(`.check-item[data-id="${id}"]`);
+  if (checkedItems.has(id)) {
+    checkedItems.delete(id);
+    box.classList.remove('checked');
+    row.classList.remove('done');
+  } else {
+    checkedItems.add(id);
+    box.classList.add('checked');
+    row.classList.add('done');
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = parseInt(document.getElementById('total-count').textContent);
+  const checked = checkedItems.size;
+  document.getElementById('checked-count').textContent = checked;
+  const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+  document.getElementById('main-progress').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '% packed';
+}
+
+function renderItinerary() {
+  const container = document.getElementById('itinerary-container');
+  itineraryData.forEach((day, i) => {
+    const card = document.createElement('div');
+    card.className = 'day-card';
+    if (i === 0) card.classList.add('open');
+
+    const header = document.createElement('div');
+    header.className = 'day-header';
+    header.addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+
+    header.innerHTML = `
+      <div class="day-num">${day.day}</div>
+      <div class="day-info">
+        <div class="day-title">${day.date} — ${day.title}</div>
+        <div class="day-meta">🚗 ${day.drive} · 🏕 ${day.sleep}</div>
+        <div class="day-tags" style="margin-top:6px;">
+          ${day.tags.map(t => `<span class="tag tag-${t.type}">${t.text}</span>`).join('')}
+        </div>
+      </div>
+      <div class="chevron">▼</div>
+    `;
+
+    const body = document.createElement('div');
+    body.className = 'day-body';
+
+    const list = document.createElement('ul');
+    list.className = 'stop-list';
+
+    day.stops.forEach(stop => {
+      const li = document.createElement('li');
+      li.className = 'stop-item';
+      li.innerHTML = `
+        <span class="stop-icon">${stop.icon}</span>
+        <div>
+          <div class="stop-name">${stop.name}</div>
+          <div class="stop-tip">${stop.tip}</div>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+
+    body.appendChild(list);
+
+    const buf = document.createElement('div');
+    buf.className = 'buffer-box';
+    buf.textContent = day.buffer;
+    body.appendChild(buf);
+
+    card.appendChild(header);
+    card.appendChild(body);
+    container.appendChild(card);
+  });
+}
+
+function renderTips() {
+  const container = document.getElementById('tips-container');
+  tipsData.forEach(tip => {
+    const card = document.createElement('div');
+    card.className = 'tip-card';
+    card.innerHTML = `
+      <span class="tip-icon">${tip.icon}</span>
+      <strong>${tip.title}</strong>
+      ${tip.text}
+    `;
+    container.appendChild(card);
+  });
+
+  const skipContainer = document.getElementById('skip-container');
+  skipData.forEach(skip => {
+    const card = document.createElement('div');
+    card.className = 'skip-card';
+    card.innerHTML = `
+      <span class="skip-x">✕</span>
+      <div class="skip-why"><strong>${skip.name}</strong>${skip.reason}</div>
+    `;
+    skipContainer.appendChild(card);
+  });
+}
+
+function renderBudget() {
+  const container = document.getElementById('budget-container');
+  budgetData.forEach(row => {
+    const div = document.createElement('div');
+    div.className = `budget-row${row.isTotal ? ' total' : ''}`;
+    div.innerHTML = `
+      <span class="budget-label">${row.label}</span>
+      <span class="budget-per">${row.perPerson} / person</span>
+      <span class="budget-total">${row.total}</span>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+renderChecklist();
+renderItinerary();
+renderTips();
+renderBudget();
+
+// animate progress bar on load
+setTimeout(() => updateProgress(), 100);
+</script>
+
+</body>
+</html>
